@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/textView1" android:text="@string/config" android:layout_marginTop="5dp"></TextView>
+        <TextView android:layout_width="wrap_content" android:text="@string/ip" android:layout_height="wrap_content" android:id="@+id/textView2"></TextView>
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:maxLength="3" android:id="@+id/ip1"></EditText>
+            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:maxLength="3" android:id="@+id/ip2"></EditText>
+            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:maxLength="3" android:id="@+id/ip3"></EditText>
+            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:maxLength="3" android:id="@+id/ip4"></EditText>
+        </LinearLayout>
+        <TextView android:layout_width="wrap_content" android:text="@string/inport" android:layout_height="wrap_content" android:id="@+id/textView3"></TextView>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number" android:id="@+id/portIn"></EditText>
+        <TextView android:layout_width="wrap_content" android:text="@string/outport" android:layout_height="wrap_content" android:id="@+id/textView4"></TextView>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number" android:id="@+id/portOut"></EditText>
+        <TextView android:layout_width="wrap_content" android:text="@string/user" android:layout_height="wrap_content" android:id="@+id/textView5"></TextView>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/user">
+        </EditText>
+        <TextView android:layout_width="wrap_content" android:text="@string/pswd" android:layout_height="wrap_content" android:id="@+id/textView6"></TextView>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPassword" android:id="@+id/pswd"></EditText>
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/save" android:layout_marginTop="5dp" android:id="@+id/savebtn"></Button>
+    </LinearLayout>
+    
+</ScrollView>

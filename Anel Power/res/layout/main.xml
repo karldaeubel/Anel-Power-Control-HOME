@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@+id/ScrollView1"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<LinearLayout android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:id="@+id/linearLayout4"
+		android:orientation="vertical">
+		<TextView android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="@string/steckdosen" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:layout_marginTop="5dp"
+			android:id="@+id/textView7"></TextView>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+			<ToggleButton android:text="ToggleButton"
+				android:layout_height="wrap_content" android:id="@+id/toggleButton1"
+				android:layout_marginLeft="5dp" android:layout_width="wrap_content"></ToggleButton>
+			<TextView android:text="@string/Steckdose_1"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:id="@+id/textView1"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/linearLayout2">
+			<ToggleButton android:text="ToggleButton"
+				android:layout_height="wrap_content" android:id="@+id/toggleButton2"
+				android:layout_marginLeft="5dp" android:layout_width="wrap_content"></ToggleButton>
+			<TextView android:text="@string/Steckdose_2"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:id="@+id/textView2"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/linearLayout3">
+			<ToggleButton android:text="ToggleButton"
+				android:layout_height="wrap_content" android:id="@+id/toggleButton3"
+				android:layout_marginLeft="5dp" android:layout_width="wrap_content"></ToggleButton>
+			<TextView android:text="@string/Steckdose_3"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:id="@+id/textView3"></TextView>
+		</LinearLayout>
+		<Button android:id="@+id/update" android:layout_height="wrap_content"
+			android:layout_width="match_parent" android:text="@string/Update"></Button>
+		<TextView android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="@string/ausschalten" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:layout_marginTop="5dp"
+			android:id="@+id/textView6"></TextView>
+		<TableLayout android:layout_width="match_parent"
+			android:id="@+id/tableLayout1" android:layout_height="wrap_content">
+			<TableRow android:layout_height="wrap_content" android:id="@+id/tableRow1"
+				android:layout_width="wrap_content">
+				<TextView android:layout_height="wrap_content"
+					android:layout_weight="0.3" android:text="@string/Steckdose_"
+					android:layout_width="wrap_content" android:id="@+id/textView4"></TextView>
+				<Spinner android:layout_height="wrap_content"
+					android:layout_weight="1" android:id="@+id/spinner1"
+					android:layout_width="match_parent"></Spinner>
+			</TableRow>
+			<TableRow android:layout_height="wrap_content" android:id="@+id/tableRow2"
+				android:layout_width="wrap_content">
+				<TextView android:layout_height="wrap_content"
+					android:layout_weight="0.3" android:text="@string/time"
+					android:layout_width="wrap_content" android:id="@+id/textView5"></TextView>
+				<EditText android:layout_height="wrap_content"
+					android:layout_weight="1" android:inputType="number" android:id="@+id/editText1"
+					android:layout_width="match_parent"></EditText>
+			</TableRow>
+		</TableLayout>
+		<Button android:id="@+id/timesend" android:layout_height="wrap_content"
+			android:layout_width="match_parent" android:text="@string/Senden"></Button>
+		<RelativeLayout android:layout_width="match_parent"
+			android:id="@+id/relativeLayout1" android:layout_height="wrap_content">
+			<Button android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Config"
+				android:layout_centerHorizontal="true" android:id="@+id/configbtn"
+				android:drawableLeft="@drawable/setting"
+				android:drawablePadding="3px">
+			</Button>
+		</RelativeLayout>
+	</LinearLayout>
+</ScrollView>

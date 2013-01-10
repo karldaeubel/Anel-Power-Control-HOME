@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Power Control</string>
+    <string name="Steckdose_1">Steckdose 1</string>
+    <string name="Steckdose_2">Steckdose 2</string>
+    <string name="Steckdose_3">Steckdose 3</string>
+    <string name="Update">Update</string>
+    <string name="Senden">Senden</string>
+    <string name="Steckdose_">Steckdose:</string>
+    <string name="time">Zeit (sec):</string>
+    <string name="ausschalten">Ausschalten:</string>
+    <string name="steckdosen">Steckdosen:</string>
+    <string name="Config"> Config</string>
+    <string name="config">Config:</string>
+    <string name="ip">IP:</string>
+    <string name="inport">InPort:</string>
+    <string name="outport">OutPort:</string>
+    <string name="user">User:</string>
+    <string name="pswd">Password:</string>
+    <string name="save">Speichern</string>
+</resources>
