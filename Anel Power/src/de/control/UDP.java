@@ -41,7 +41,19 @@ public class UDP {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public void setUser(String user, String password) {
+		this.user = new User(user, password);
+	}
 
+	public void setPassword(String password) {
+		if(this.user == null) {
+			this.user = new User("admin", password);
+		}else {
+			this.user.setPassword(password);
+		}
+	}
+	
 	/**
 	 * @return the portInput
 	 */

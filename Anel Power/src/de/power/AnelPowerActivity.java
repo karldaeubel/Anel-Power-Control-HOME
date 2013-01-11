@@ -34,8 +34,6 @@ public class AnelPowerActivity extends Activity {
 	
 	Context context = this;
 	
-	Spinner spinner;
-	
 	public class myOnCheckChangeListener implements OnCheckedChangeListener {
 
 		@Override
@@ -61,41 +59,104 @@ public class AnelPowerActivity extends Activity {
 	public static ToggleButton toggle2 = null;
 	public static ToggleButton toggle3 = null;
 	
+	Dialog dialog;
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        //Log.i("onCreate", "onCreate()");
+        Log.i("onCreate", "onCreate()");
         
 		readData();
 		
-		final Dialog dialog = new Dialog(context);
+		if(savedInstanceState == null || !savedInstanceState.getBoolean("Resume")) {
+			Log.i("onCreate()", "savedInstances null!");
+			setLogIn(udp.getUser().getUser(), "");
+			setGUI(false, false, false, 0, "");
+		}else if(savedInstanceState.getBoolean("Resume")){
+			Log.i("onCreate", "onCreate()2anel");
+
+			udp.setPassword(savedInstanceState.getString("password_real"));
+			
+			if(savedInstanceState.getBoolean("Dialog")) {
+				Log.i("onCreate", "onCreate()3");
+				setLogIn(savedInstanceState.getString("user"), savedInstanceState.getString("password"));
+			}
+			
+			setGUI(savedInstanceState.getBoolean("outlet1"),
+					savedInstanceState.getBoolean("outlet2"),
+					savedInstanceState.getBoolean("outlet3"),
+							savedInstanceState.getInt("spinner"),
+							savedInstanceState.getString("timeValue"));
+		}
+    }
+    
+    public void setLogIn(String u, String pass) {
+    	dialog = new Dialog(context);
 		dialog.setContentView(R.layout.login_layout);
 		dialog.setTitle("Log In");
 		
 		final EditText username = (EditText) dialog.findViewById(R.id.username);
-		username.setText(udp.getUser().getUser());
+		username.setText(u);
+		
+		final EditText paswd = (EditText) dialog.findViewById(R.id.paswd);
+		paswd.setText(pass);
 		
 		Button dialogButton = (Button) dialog.findViewById(R.id.loginButton);
 		dialogButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				EditText paswd = (EditText) dialog.findViewById(R.id.paswd);
 				udp.setUser(new User(username.getText().toString(), paswd.getText().toString()));
+				Log.i("klick!!", udp.getUser().toString());
 				writeToFile();
 				dialog.dismiss();
 			}
 		});
 		dialog.show();
-		
-		toggle1 = (ToggleButton) findViewById(R.id.toggleButton1);
+    }
+    
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+    	Log.i("onCreate", "onSaveInstance");
+    	super.onSaveInstanceState(outState);
+    	
+    	outState.putBoolean("Resume", true);
+    	
+    	if(dialog != null) {
+    		outState.putString("user", ((EditText) dialog.findViewById(R.id.username)).getText().toString());
+    		outState.putString("password", ((EditText) dialog.findViewById(R.id.paswd)).getText().toString());
+    	}
+    	
+    	outState.putString("password_real", udp.getUser().getPassword());
+    	
+    	outState.putString("timeValue", ((EditText) findViewById(R.id.editText1)).getText().toString());
+    	outState.putInt("spinner", ((Spinner) findViewById(R.id.spinner1)).getSelectedItemPosition());
+    	
+    	outState.putBoolean("outlet1", toggle1.isChecked());
+    	outState.putBoolean("outlet2", toggle2.isChecked());
+    	outState.putBoolean("outlet3", toggle3.isChecked());
+    	    	
+    	if(dialog != null && dialog.isShowing()) {
+    		outState.putBoolean("Dialog", true);
+    	}else {
+    		outState.putBoolean("Dialog", false);
+    	}
+    }
+    
+    public void setGUI(boolean togg1, boolean togg2, boolean togg3, int spin, String timeValue) {
+    	toggle1 = (ToggleButton) findViewById(R.id.toggleButton1);
+    	toggle1.setChecked(togg1);
 		toggle1.setOnCheckedChangeListener(new myOnCheckChangeListener());
+		
 		toggle2 = (ToggleButton) findViewById(R.id.toggleButton2);
+		toggle2.setChecked(togg2);
 		toggle2.setOnCheckedChangeListener(new myOnCheckChangeListener());
+		
 		toggle3 = (ToggleButton) findViewById(R.id.toggleButton3);
+		toggle3.setChecked(togg3);
 		toggle3.setOnCheckedChangeListener(new myOnCheckChangeListener());
 
 		Button update = (Button) findViewById(R.id.update);
@@ -108,17 +169,20 @@ public class AnelPowerActivity extends Activity {
 			}
 		});
 			
-		spinner = (Spinner) findViewById(R.id.spinner1);
+		final Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.value, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
+		spinner.setSelection(spin);
+		
+		final EditText time = (EditText) findViewById(R.id.editText1);
+		time.setText(timeValue);
 		
 		Button send = (Button) findViewById(R.id.timesend);
 		send.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				EditText time = (EditText) findViewById(R.id.editText1);
 				
 				if(spinner.getSelectedItemPosition() == Spinner.INVALID_POSITION) {
 					Toast toast = Toast.makeText(context, "Keine Steckdose ausgewählt!", Toast.LENGTH_LONG);
@@ -155,7 +219,7 @@ public class AnelPowerActivity extends Activity {
     
     @Override
     public void onStart() {
-    	//Log.i("on-Start", "on.Startttttt!!");
+    	Log.i("on-Start", "on.Startttttt!!");
     	super.onStart();
     	if(udpR == null) {
     		udpR = new UDPReciever(udp);
@@ -164,9 +228,18 @@ public class AnelPowerActivity extends Activity {
     }
     
     @Override
+    public void onPause() {
+    	Log.i("on-Stop", "onPause()!!");
+    	super.onPause();
+    }
+    
+    @Override
     public void onStop() {
-    	//Log.i("on-Stop", "on'Stopppp!!");
+    	Log.i("on-Stop", "on'Stopppp!!");
     	super.onStop();
+    	if(dialog != null) {
+    		dialog.dismiss();
+    	}
     	if(!udpR.isInterrupted()) {
     		udpR.interrupt();
     		while(udpR.isAlive()) {
