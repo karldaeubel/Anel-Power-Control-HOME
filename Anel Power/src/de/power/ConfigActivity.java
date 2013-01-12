@@ -3,7 +3,6 @@ package de.power;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import de.control.UDPReciever;
 import de.control.User;
 import android.app.Activity;
 import android.content.Context;
@@ -128,14 +127,14 @@ public class ConfigActivity extends Activity {
 				AnelPowerActivity.udp.setUser(new User(user.getText().toString(), password.getText().toString()));
 				
 				//update the UDPReciever
-				if(AnelPowerActivity.udpR != null) {
-					AnelPowerActivity.udpR.interrupt();
-					while(AnelPowerActivity.udpR.isAlive()) {
+				//if(AnelPowerActivity.udpR != null) {
+				//	AnelPowerActivity.udpR.interrupt();
+				//	while(AnelPowerActivity.udpR.isAlive()) {
 						
-					}
-					AnelPowerActivity.udpR = new UDPReciever(AnelPowerActivity.udp);
-					AnelPowerActivity.udpR.start();
-				}
+				//	}
+				//	AnelPowerActivity.udpR = new AnelPowerActivity.UDPReciever(AnelPowerActivity.udp);
+				//	AnelPowerActivity.udpR.start();
+				//}
 
 				AnelPowerActivity.writeToFile();
 				

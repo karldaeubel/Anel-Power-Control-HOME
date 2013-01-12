@@ -7,9 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketException;
 
-import de.control.UDPReciever;
 import de.control.UDPSender;
 import de.control.User;
 
@@ -30,7 +32,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class AnelPowerActivity extends Activity {
+public class AnelPowerActivity extends Activity{
 	
 	Context context = this;
 	
@@ -50,6 +52,68 @@ public class AnelPowerActivity extends Activity {
 			s.switchOutlet(temp, isChecked);
 		}
 	}
+	
+	public class UDPReciever extends Thread{
+
+		UDP udp;
+		
+		DatagramSocket recieveSocket;
+		DatagramPacket recieve;
+		
+		public UDPReciever() {
+			udp = new UDP();
+			
+			try {
+				recieveSocket = new DatagramSocket(udp.getPortInput());
+				recieveSocket.setSoTimeout(500);
+			}catch (SocketException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public UDPReciever(UDP p) {
+			udp = p;
+			
+			try {
+				recieveSocket = new DatagramSocket(udp.getPortInput());
+				recieveSocket.setSoTimeout(500);
+			}catch (SocketException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public void run() {
+			byte[] in = null;
+			recieve = null;
+			in = new byte[512];
+			recieve = new DatagramPacket(in, in.length);
+			while(!isInterrupted()) {
+		        	
+				try {
+					//Log.i("recieve!°°°°°!!", "läuft immer noch?");
+					recieveSocket.receive(recieve);
+					// display response
+			        String ausgabe = new String(recieve.getData());
+			        final String[] alles = ausgabe.split(":");
+
+			        if(alles.length >= 8) {
+			        	runOnUiThread(new Runnable() {
+								
+							@Override
+							public void run() {
+								toggle1.setChecked(alles[6].endsWith("1") ? true : false);
+								toggle2.setChecked(alles[7].endsWith("1") ? true : false);
+								toggle3.setChecked(alles[8].endsWith("1") ? true : false);
+							}
+						});
+		        	}			        
+				}catch (IOException e) {
+				}
+			}
+			recieveSocket.close();
+		}
+	}
+
 	
 	static UDP udp = null;
 	static File file = null;
