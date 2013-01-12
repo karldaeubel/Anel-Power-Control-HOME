@@ -9,6 +9,7 @@ Supporting:
 - switch off one outlet time delayed
 - ready to install .apk in the /bin folder
 
+
 (remember that linux, and so android, only allows to listen on port numbers greater than approx. 1000)
 
 developer: Karl Däubel
