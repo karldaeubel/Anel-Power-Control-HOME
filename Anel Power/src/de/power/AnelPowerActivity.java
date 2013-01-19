@@ -21,10 +21,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -162,6 +164,7 @@ public class AnelPowerActivity extends Activity{
 		dialog.setContentView(R.layout.login_layout);
 		dialog.setTitle("Log In");
 		
+		
 		final EditText username = (EditText) dialog.findViewById(R.id.username);
 		username.setText(u);
 		
@@ -179,6 +182,20 @@ public class AnelPowerActivity extends Activity{
 				dialog.dismiss();
 			}
 		});
+		
+		CheckBox box = (CheckBox) dialog.findViewById(R.id.checkBox1);
+		box.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked) {
+					paswd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+				}else {
+					paswd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+				}
+			}
+		});
+		
 		dialog.show();
     }
     
