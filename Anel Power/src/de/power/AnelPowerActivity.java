@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -121,15 +123,19 @@ public class AnelPowerActivity extends Activity{
 	static File file = null;
 	static UDPReciever udpR = null;
 	
-	public static ToggleButton toggle1 = null;
-	public static ToggleButton toggle2 = null;
-	public static ToggleButton toggle3 = null;
+	public static Switch toggle1 = null;
+	public static Switch toggle2 = null;
+	public static Switch toggle3 = null;
 	
 	Dialog dialog;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+    	StrictMode.setThreadPolicy(policy);
+    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
@@ -228,15 +234,15 @@ public class AnelPowerActivity extends Activity{
     }
     
     public void setGUI(boolean togg1, boolean togg2, boolean togg3, int spin, String timeValue) {
-    	toggle1 = (ToggleButton) findViewById(R.id.toggleButton1);
+    	toggle1 = (Switch) findViewById(R.id.toggleButton1);
     	toggle1.setChecked(togg1);
 		toggle1.setOnCheckedChangeListener(new myOnCheckChangeListener());
 		
-		toggle2 = (ToggleButton) findViewById(R.id.toggleButton2);
+		toggle2 = (Switch) findViewById(R.id.toggleButton2);
 		toggle2.setChecked(togg2);
 		toggle2.setOnCheckedChangeListener(new myOnCheckChangeListener());
 		
-		toggle3 = (ToggleButton) findViewById(R.id.toggleButton3);
+		toggle3 = (Switch) findViewById(R.id.toggleButton3);
 		toggle3.setChecked(togg3);
 		toggle3.setOnCheckedChangeListener(new myOnCheckChangeListener());
 

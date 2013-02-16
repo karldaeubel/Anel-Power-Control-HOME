@@ -16,6 +16,6 @@
     <string name="inport">InPort:</string>
     <string name="outport">OutPort:</string>
     <string name="user">User:</string>
-    <string name="pswd">Password:</string>
-    <string name="save">Speichern</string>
+    <string name="pswd">Password:</string><string name="save">Speichern</string>
+    
 </resources>
