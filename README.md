@@ -1,7 +1,7 @@
 Anel-Power-Control-HOME
 =======================
 
-An Android App for the NET-PowerControl HOME from Anel Elektronik AG (for Android version 4.0 and higher)
+An Android App for the NET-PowerControl HOME from Anel Elektronik AG targeted for Android 4.1 (JELLY_BEAN), API Level: 16
 
 Features:
 ---------
